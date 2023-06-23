@@ -1,8 +1,10 @@
 interface ModalProps {
   modalOpen: boolean;
+  setModalOpen: (open: boolean) => boolean | void;
+  children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ modalOpen }) => {
+const Modal: React.FC<ModalProps> = ({ modalOpen, setModalOpen, children }) => {
   return (
     <div>
       <dialog
@@ -10,11 +12,13 @@ const Modal: React.FC<ModalProps> = ({ modalOpen }) => {
         className={`modal ${modalOpen ? "modal-open" : ""}`}
       >
         <form method="dialog" className="modal-box">
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          <button
+            onClick={() => setModalOpen(false)}
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
             ✕
           </button>
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">Press ESC key or click on ✕ button to close</p>
+          {children}
         </form>
       </dialog>
     </div>
