@@ -5,21 +5,15 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ modalOpen, setModalOpen, children }) => {
+  // handleSubmitNewTodo is a function to handle the submit of the form
+
   return (
     <div>
       <dialog
         id="my_modal_3"
         className={`modal ${modalOpen ? "modal-open" : ""}`}
       >
-        <form method="dialog" className="modal-box">
-          <button
-            onClick={() => setModalOpen(false)}
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-          >
-            ✕
-          </button>
-          {children}
-        </form>
+        {children}
       </dialog>
     </div>
   );

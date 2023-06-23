@@ -2,10 +2,17 @@
 
 import { AiOutlinePlus } from "react-icons/ai";
 import Modal from "./Modal";
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 
 export const AddTask = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [newTaskValue, setNewTaskValue] = useState<string>(""); // [1]
+  const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+    setNewTaskValue("");
+  };
   return (
     <div>
       <button
@@ -17,15 +24,29 @@ export const AddTask = () => {
       </button>
 
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        <h3>Add a new task</h3>
-        <input
-          type="text"
-          placeholder="Type here"
-          className="input input-bordered input-primary w-full mb-5 mt-5"
-        />
-        <button type="submit" className="btn">
-          Submit
-        </button>
+        <form
+          onSubmit={handleSubmitNewTodo}
+          method="dialog"
+          className="modal-box"
+        >
+          <h3>Add a new task</h3>
+          <button
+            onClick={() => setModalOpen(false)}
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </button>
+          <input
+            value={newTaskValue}
+            onChange={(e) => setNewTaskValue(e.target.value)}
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered input-primary w-full mb-5 mt-5"
+          />
+          <button type="submit" className="btn">
+            Submit
+          </button>
+        </form>
       </Modal>
     </div>
   );
