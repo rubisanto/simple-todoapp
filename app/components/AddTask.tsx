@@ -53,7 +53,7 @@ export const AddTask = () => {
             placeholder="Type here"
             className="input input-bordered input-primary w-full mb-5 mt-5"
           />
-          <button type="submit" className="btn">
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
         </form>
